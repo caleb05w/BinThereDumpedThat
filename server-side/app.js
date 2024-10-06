@@ -1,12 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
 const PORT = process.env.PORT || 3005;
 const cors = require("cors");
 const bin = require("./routes/bin");
+const auth = require("./routes/auth");
 
 dotenv.config();
 const app = express();
+app.use(cookieParser());
 
 app.use(express.json());
 
@@ -25,6 +28,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use("/", bin);
+app.use("/auth", auth);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
