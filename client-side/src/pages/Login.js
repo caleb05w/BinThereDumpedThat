@@ -34,37 +34,47 @@ export const Login = () => {
   };
 
   return (
-    <div className='border-2 border-orange flex justify-end h-lvh bg-[#050505] relative w-lvw'>
-    <div className='border-2 w-[75%]  border-black rounded-[0.25rem] bg-white p-[1%] '>
-      
-      
-      <div className=' h-[100%] flex flex-col justify-between'>
-        
-        <div className=''>
-          <h1 className='text-center'>Log In</h1>
-          <p className='text-center'> A super cool catchphrase </p>
-        </div>
-
-      <div className='grid grid-rows-3 gap-[20%] border-2 h-fit'>
-      <div className='border'>
-        <p className='text-gray-600'>Add your Email</p>
-         <InputButton placeholder="Enter an Email" onChange={(e) => setEmail(e.target.value)} value={email} type="email" />
-        </div>
-
-        <div>
-            <form>
-            <p className='text-gray-600'>Enter a Password</p>
-            <InputButton placeholder="Enter a Password" onChange={(e) => setPassword(e.target.value)} value={password} type="password" />
-            </form>
-            </div>
-            <button className='border-2 border-black bg-[#050505] text-white flex justify-center px-[1%] h-fit py-[1%] w-[100%] rounded-[0.25rem]' type="submit">Log In</button>
+    <div className="border-2 border-orange flex justify-end h-lvh bg-[#050505] relative w-lvw">
+      <div className="border-2 w-[75%]  border-black rounded-[0.25rem] bg-white p-[1%] ">
+        <div className=" h-[100%] flex flex-col justify-between">
+          <div className="">
+            <h1 className="text-center">Log In</h1>
+            <p className="text-center"> A super cool catchphrase </p>
           </div>
-        
 
+          <form onSubmit={logIn}>
+            <div className="grid grid-rows-3 gap-[20%] border-2 h-fit">
+              <div className="border">
+                <p className="text-gray-600">Add your Email</p>
+                <InputButton
+                  placeholder="Enter an Email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  type="email"
+                />
+              </div>
+
+              <div>
+                <p className="text-gray-600">Enter a Password</p>
+                <InputButton
+                  placeholder="Enter a Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  type="password"
+                />
+              </div>
+              <button
+                className="border-2 border-black bg-[#050505] text-white flex justify-center px-[1%] h-fit py-[1%] w-[100%] rounded-[0.25rem]"
+                type="submit"
+              >
+                Log In
+              </button>
+            </div>
+          </form>
+        </div>
+
+        {message && <p>{message}</p>}
       </div>
-
-      {message && <p>{message}</p>}
-    </div>
     </div>
   );
 };
