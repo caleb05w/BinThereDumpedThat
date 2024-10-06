@@ -24,11 +24,35 @@ router.post("/createBin", async (req, res) => {
 router.get("/allBins", async (req, res) => {
   try {
     const bins = await Bin.find();
-    res.status(200).json(bins);
+
+    const updatedBins = bins.map((bin) => {
+      let updatedBinType;
+      switch (bin.binType) {
+        case 1:
+          updatedBinType = "recycling";
+          break;
+        case 2:
+          updatedBinType = "compost";
+          break;
+        case 3:
+          updatedBinType = "regular garbage";
+          break;
+        default:
+          updatedBinType = bin.binType;
+      }
+
+      return {
+        ...bin._doc,
+        binType: updatedBinType,
+      };
+    });
+
+    res.status(200).json(updatedBins);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error, please try again later" });
   }
 });
+
 
 module.exports = router;
