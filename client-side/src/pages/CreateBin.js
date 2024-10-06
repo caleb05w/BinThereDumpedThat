@@ -28,8 +28,9 @@ export const CreateBin = () => {
   };
 
   return (
-    <div className="flex flex-col gap-8">
-      <h1>Create Bin</h1>
+    <div className="px-[15%] flex flex-col gap-8 border-2 border-black">
+      <h1 className="text-6xl font-bold">Create New Bin.</h1>
+      <p className="text-gray-400">A super cool catchphrase</p>
 
       <form className="flex flex-col gap-8 items-start" onSubmit={submit}>
         <input
@@ -92,7 +93,7 @@ export const CreateBin = () => {
           type="file"
           accept="image/*"
         />
-        <button type="submit">Submit</button>
+        <button className="p-[0.3%] border-2 text-white bg-black border-black rounded-md" type="submit">Submit</button>
       </form>
     </div>
   );

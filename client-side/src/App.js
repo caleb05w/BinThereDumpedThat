@@ -6,6 +6,7 @@ import { CreateBin } from "./pages/CreateBin";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import ProtectedRoute from "./ProtectedRoute";
+import BinAlert from "./BinAlert";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/binAlert" element={<BinAlert />} />
       </Routes>
     </Router>
   );
