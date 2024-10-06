@@ -22,7 +22,6 @@ const useProfile = () => {
     }
   };
 
-  // New logout function
   const logout = async () => {
     try {
       await axios.post(
