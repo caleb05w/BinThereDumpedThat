@@ -7,6 +7,7 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import ProtectedRoute from "./ProtectedRoute";
 import BinAlert from "./BinAlert";
+import SideBar from "./components/SideBar";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/binAlert" element={<BinAlert />} />
+        <Route path="/sideBar" element={<SideBar />} />
       </Routes>
     </Router>
   );
