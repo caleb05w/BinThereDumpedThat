@@ -69,6 +69,7 @@ router.post("/createBin", upload.single("image"), async (req, res) => {
       binType: binTypeNumber,
       binStatus: "empty",
       image: hash,
+      lastUpdated: new Date(),
     });
 
     res.status(201).json({
@@ -77,6 +78,7 @@ router.post("/createBin", upload.single("image"), async (req, res) => {
       binStatus: bin.binStatus,
       binType: bin.binType,
       image: bin.image,
+      lastUpdated: bin.lastUpdated,
     });
   } catch (err) {
     console.error(err);
