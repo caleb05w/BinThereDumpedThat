@@ -51,18 +51,20 @@ export const CreateBin = () => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center py-20">
+    <div className="flex w-full flex-col items-center justify-center py-28 lg:py-20">
       <Button
-        className={"w-max px-4 py-2 fixed top-4 left-4"}
+        className={"w-max px-2 lg:px-4 py-1 lg:py-2 fixed top-4 left-4"}
         onClick={cancel}
         text={"Cancel"}
       />
-      <h1 className="text-center text-6xl font-bold">Create New Bin.</h1>
-      <p className="mt-1 mb-4 text-center text-lg text-gray-400">
+      <h1 className="text-center text-3xl lg:text-6xl font-bold">
+        Create New Bin.
+      </h1>
+      <p className="mt-1 mb-4 text-center text-sm lg:text-lg text-gray-400">
         Put the fries (in the right) bin bro.
       </p>
 
-      <form className="w-1/2" onSubmit={submit}>
+      <form className="lg:w-1/2 w-10/12" onSubmit={submit}>
         <InputButton
           placeholder="Enter a Bin Name"
           onChange={(e) => setLocation(e.target.value)}
@@ -70,9 +72,11 @@ export const CreateBin = () => {
           value={location}
         />
 
-        <div className="mt-[2%]">
-          <h2 className="font-bold text-xl text-black mb-2">Select Bin Type</h2>
-          <div className="mt-[0.5%] flex flex-row gap-6">
+        <div className="lg:mt-3 mt-2">
+          <h2 className="font-bold text-xl text-black mb-1 lg:mb-2">
+            Select Bin Type
+          </h2>
+          <div className="mt-[1%] flex flex-wrap lg:flex-row gap-6">
             <label className="flex items-center cursor-pointer">
               <input
                 type="radio"

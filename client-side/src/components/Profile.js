@@ -14,8 +14,8 @@ const Profile = () => {
   }
 
   return (
-    <div className="flex flex-row items-center justify-start rounded-lg bg-white py-10 px-6 gap-6">
-      <div className="w-20 h-20 rounded-full overflow-hidden">
+    <div className="flex flex-row items-center justify-start rounded-lg bg-white lg:py-10 py-4 px-4 lg:px-6 gap-6">
+      <div className="lg:w-20 lg:h-20 h-12 w-12 rounded-full overflow-hidden">
         <img
           className="w-full h-full object-contain"
           src={defaultPP}

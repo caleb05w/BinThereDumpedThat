@@ -11,7 +11,7 @@ function SideBar() {
 
   if (!selectedBin) {
     return (
-      <div className="flex flex-col gap-1 items-center justify-center bg-white h-full w-full rounded-lg">
+      <div className="flex flex-col py-4 lg:py-0 gap-1 items-center justify-center bg-white h-full w-full rounded-lg">
         <p className="poppins-semibold text-xl">No bin selected.</p>
         <p className="poppins-regular text-black text-opacity-30 text-sm">
           Select a bin to start.
@@ -54,8 +54,14 @@ function SideBar() {
                 className={`uppercase ${
                   selectedBin.binStatus === "full"
                     ? "text-red-500"
+                    : selectedBin.binStatus === "full"
+                    ? "text-red-500"
                     : selectedBin.binStatus === "not full"
                     ? "text-yellow-500"
+                    : selectedBin.binStatus === "Not full"
+                    ? "text-yellow-500"
+                    : selectedBin.binStatus === "Empty"
+                    ? "text-green-500"
                     : selectedBin.binStatus === "empty"
                     ? "text-green-500"
                     : "text-black"
@@ -89,11 +95,11 @@ function SideBar() {
                 <p
                   className={`uppercase ${
                     selectedBin.binStatus === "full"
-                      ? "text-red-500 text-lg"
+                      ? "text-red-500 text-sm lg:text-lg"
                       : selectedBin.binStatus === "not full"
-                      ? "text-yellow-500 text-lg"
+                      ? "text-yellow-500 text-sm lg:text-lg"
                       : selectedBin.binStatus === "empty"
-                      ? "text-green-500 text-lg"
+                      ? "text-green-500 text-sm lg:text-lg"
                       : "text-black"
                   }`}
                 >
@@ -103,22 +109,26 @@ function SideBar() {
 
               <div className="w-[100%] flex items-center justify-between">
                 <p className="text-black text-opacity-30 text-sm">Bin Type</p>
-                <p className="poppins-medium text-lg">{selectedBin.binType}</p>
+                <p className="poppins-medium text-sm lg:text-lg">
+                  {selectedBin.binType}
+                </p>
               </div>
 
               <div className="w-[100%] flex items-center justify-between">
                 <p className="text-black text-opacity-30 text-sm">
                   Bin Location
                 </p>
-                <p className="poppins-medium text-lg">{selectedBin.location}</p>
+                <p className="poppins-medium text-sm lg:text-lg">
+                  {selectedBin.location}
+                </p>
               </div>
 
               <div className="w-[100%] flex items-center justify-between">
                 <p className="text-black text-opacity-30 text-sm">
                   Last Updated
                 </p>
-                <p className="poppins-medium text-lg">
-                  <p className="poppins-medium text-lg">{`${formattedDate}, ${formattedTime}`}</p>
+                <p className="poppins-medium text-sm lg:text-lg">
+                  <p className="poppins-medium text-sm lg:text-lg">{`${formattedDate}, ${formattedTime}`}</p>
                 </p>
               </div>
             </div>

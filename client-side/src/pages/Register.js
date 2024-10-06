@@ -69,8 +69,10 @@ export const Register = () => {
         <div className="text-center">
           <form className="mb-10" onSubmit={handleSubmit}>
             <div className="">
-              <h1 className="poppins-semibold text-6xl">Create an Account</h1>
-              <p className="poppins-regular text-lg mt-2 text-black text-opacity-40 mb-10">
+              <h1 className="poppins-semibold text-3xl lg:text-6xl">
+                Create an Account
+              </h1>
+              <p className="poppins-regular text-lg mt-2 text-black text-opacity-40 mb-4 lg:mb-10">
                 {" "}
                 Enter Your Information Below{" "}
               </p>

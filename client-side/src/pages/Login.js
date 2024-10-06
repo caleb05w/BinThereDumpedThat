@@ -41,9 +41,11 @@ export const Login = () => {
   return (
     <div className="flex flex-col items-center w-screen h-screen justify-center">
       <div className="flex flex-col gap-2">
-        <div className="text-center">
-          <h1 className="poppins-semibold text-6xl">Welcome Back</h1>
-          <p className="poppins-regular text-lg mt-2 text-black text-opacity-40 mb-10">
+        <div className="text-center -mt-10 lg:mt-0">
+          <h1 className="poppins-semibold text-3xl lg:text-6xl">
+            Welcome Back
+          </h1>
+          <p className="poppins-regular text-sm lg:text-lg mt-2 text-black text-opacity-40 mb-4 lg:mb-10">
             {" "}
             Enter Your Log In Information Below{" "}
           </p>
