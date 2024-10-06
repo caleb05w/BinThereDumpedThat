@@ -9,7 +9,7 @@ const {
   PutObjectCommand,
   GetObjectCommand,
 } = require("@aws-sdk/client-s3");
-// const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
+const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 
 dotenv.config();
 
@@ -29,18 +29,54 @@ const s3 = new S3Client({
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// POST route to create a new bin
-router.post("/createBin", async (req, res) => {
-  const { location, binStatus, binType } = req.body;
+router.post("/createBin", upload.single("image"), async (req, res) => {
+  const { location, binType } = req.body;
+
+  const binTypeMap = {
+    Recycling: 1,
+    Landfill: 2,
+    Glass: 3,
+    Compost: 4,
+  };
+
+  const binTypeNumber = binTypeMap[binType];
+
+  if (!binTypeNumber) {
+    return res.status(400).json({ error: "Invalid bin type provided." });
+  }
+
+  req.file.buffer;
+
+  const hash = crypto
+    .createHash("sha256")
+    .update(req.file.originalname + Date.now())
+    .digest("hex");
+
+  const params = {
+    Bucket: bucketName,
+    Key: hash,
+    Body: req.file.buffer,
+    ContentType: req.file.mimetype,
+  };
+
+  const command = new PutObjectCommand(params);
+
+  await s3.send(command);
 
   try {
-    const bin = await Bin.create({ location, binStatus, binType });
+    const bin = await Bin.create({
+      location,
+      binType: binTypeNumber,
+      binStatus: "empty",
+      image: hash,
+    });
 
     res.status(201).json({
       _id: bin._id,
-      locations: bin.location,
+      location: bin.location,
       binStatus: bin.binStatus,
       binType: bin.binType,
+      image: bin.image,
     });
   } catch (err) {
     console.error(err);
@@ -51,6 +87,18 @@ router.post("/createBin", async (req, res) => {
 router.get("/allBins", async (req, res) => {
   try {
     const bins = await Bin.find();
+
+    for (let bin of bins) {
+      const getObjectParams = {
+        Bucket: bucketName,
+        Key: bin.image,
+      };
+
+      const command = new GetObjectCommand(getObjectParams);
+      const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
+
+      bin.image = url;
+    }
 
     const updatedBins = bins.map((bin) => {
       let updatedBinType;
@@ -81,25 +129,5 @@ router.get("/allBins", async (req, res) => {
   }
 });
 
-router.post("/post", upload.single("image"), async (req, res) => {
-  console.log("req.file", req.file.buffer);
-  req.file.buffer;
-
-  const hash = crypto
-    .createHash("sha256")
-    .update(req.file.originalname + Date.now())
-    .digest("hex");
-
-  const params = {
-    Bucket: bucketName,
-    Key: hash,
-    Body: req.file.buffer,
-    ContentType: req.file.mimetype,
-  };
-
-  const command = new PutObjectCommand(params);
-
-  await s3.send(command);
-});
 
 module.exports = router;
