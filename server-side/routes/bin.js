@@ -106,13 +106,16 @@ router.get("/allBins", async (req, res) => {
       let updatedBinType;
       switch (bin.binType) {
         case 1:
-          updatedBinType = "recycling";
+          updatedBinType = "Recycling";
           break;
         case 2:
-          updatedBinType = "compost";
+          updatedBinType = "Landfill";
           break;
         case 3:
-          updatedBinType = "regular garbage";
+          updatedBinType = "Glass";
+          break;
+        case 4:
+          updatedBinType = "Compost";
           break;
         default:
           updatedBinType = bin.binType;
