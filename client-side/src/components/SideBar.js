@@ -9,13 +9,13 @@ function SideBar({BinID, BinType, BinLocation, BinStatus, Image}) {
         <p> {BinID} </p>
         <p>{BinStatus}<span>BinStatus</span></p>
 
-        <h1 className='text-xl poppins-semibold'> Bin Information </h1>
-
         <div className='border-2 border-black w-[100%] min-h-[30%] m-auto rounded-[0.5rem] mt-[13%]'>
           {/* <img src={}></img> */}
         </div>
+
+        <h1 className='text-xl poppins-semibold mt-[10%]'> Bin Information </h1>
         
-        <div className='flex-col flex gap-2'>
+        <div className='flex-col flex gap-2 mt-[5%]'>
           <div className='w-[100%] flex justify-between'>
             <p className='text-gray-400'> Bin ID </p>
             <p> {BinID} </p>
@@ -32,6 +32,9 @@ function SideBar({BinID, BinType, BinLocation, BinStatus, Image}) {
           </div>
         </div>
 
+      <div className='abolsute'>
+        <Button className='relative b-0' text='View More' />
+      </div>
 
     </div>
   )
