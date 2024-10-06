@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const { protect } = require("../middleware/authMiddleware");
 
 router.post("/register", async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, orgName } = req.body;
 
   try {
     const emailExists = await User.findOne({ email });
@@ -15,11 +15,12 @@ router.post("/register", async (req, res) => {
         .json({ error: "Email already linked to an account" });
     }
 
-    const user = await User.create({ email, password });
+    const user = await User.create({ email, password, orgName });
 
     res.status(201).json({
       _id: user._id,
       email: user.email,
+      orgName: user.orgName,
       token: generateToken(user._id),
     });
   } catch (err) {

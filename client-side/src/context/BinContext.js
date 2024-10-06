@@ -1,7 +1,13 @@
-import { useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
+const BinContext = createContext();
+
 export const useBins = () => {
+  return useContext(BinContext);
+};
+
+export const BinProvider = ({ children }) => {
   const [bins, setBins] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,21 +30,17 @@ export const useBins = () => {
 
   useEffect(() => {
     fetchBins();
-
     const interval = setInterval(() => {
       fetchBins();
-    }, 50);
-
+    }, 500);
     return () => clearInterval(interval);
   }, []);
 
-  return {
-    bins,
-    loading,
-    error,
-    refreshBins: fetchBins,
-    selectBin,
-    selectedBin,
-  };
+  return (
+    <BinContext.Provider
+      value={{ bins, loading, error, selectBin, selectedBin }}
+    >
+      {children}
+    </BinContext.Provider>
+  );
 };
-

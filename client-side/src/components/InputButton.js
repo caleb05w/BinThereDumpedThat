@@ -1,15 +1,18 @@
-import React from 'react'
+import React from "react";
 
-const InputButton = ({placeholder, onChange, value, type}) => { 
+const InputButton = ({ placeholder, onChange, button, value, type }) => {
   return (
-    <input
-      className="border-2 border-black w-[100%] py-[2%] rounded-[0.25rem] px-[1.5%] mt-[1%]"
-      placeholder={placeholder}
-      onChange={onChange}
-      value={value}
-      type={type}
-    />
+    <div className="flex items-center border border-black rounded-[0.25rem] mt-[1%] px-3 py-2">
+      <input
+        className="flex-grow outline-none poppins-light text-lg"
+        placeholder={placeholder}
+        onChange={onChange}
+        value={value}
+        type={type}
+      />
+      {button}
+    </div>
   );
-}
+};
 
-export default InputButton
+export default InputButton;

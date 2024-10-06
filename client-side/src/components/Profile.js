@@ -1,8 +1,9 @@
 import useProfile from "../hooks/useProfile";
 import defaultPP from "../defaultProfilePhoto.jpg";
+import Button from "./Button";
 
-export const Profile = () => {
-  const { profile, loading, refreshProfile } = useProfile();
+const Profile = () => {
+  const { profile, loading, refreshProfile, logout } = useProfile();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -13,19 +14,21 @@ export const Profile = () => {
   }
 
   return (
-    <div className="flex flex-row items-center justify-start bg-gray-200 py-5 px-6 gap-5 border-[1px] border-black">
-      <div className="w-12 h-12 rounded-full overflow-hidden">
+    <div className="flex flex-row items-center justify-start rounded-lg bg-white py-10 px-6 gap-6">
+      <div className="w-20 h-20 rounded-full overflow-hidden">
         <img
           className="w-full h-full object-contain"
           src={defaultPP}
           alt="Profile"
         />
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-0.5">
         {profile.orgName ? (
-          <h1 className="poppins-semibold">{profile.orgName}</h1>
+          <h1 className="poppins-semibold text-xl">{profile.orgName}</h1>
         ) : (
-          <h1 className="poppins-semibold">Organization name not available</h1>
+          <h1 className="poppins-semibold text-xl">
+            Organization name not available
+          </h1>
         )}
         {profile.email ? (
           <h1 className="poppins-regular text-black text-opacity-30 text-sm">
@@ -36,7 +39,14 @@ export const Profile = () => {
             Email not available
           </h1>
         )}
+        <Button
+          className={"w-max text-xs mt-1 px-2 py-1.5 "}
+          onClick={logout}
+          text={"Log Out"}
+        />
       </div>
     </div>
   );
 };
+
+export default Profile;
