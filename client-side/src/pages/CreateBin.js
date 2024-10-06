@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import InputButton from "../components/InputButton"
 
 export const CreateBin = () => {
   const [file, setFile] = useState();
@@ -28,21 +29,23 @@ export const CreateBin = () => {
   };
 
   return (
-    <div className="px-[15%] flex flex-col gap-8 border-2 border-black">
-      <h1 className="text-6xl font-bold">Create New Bin.</h1>
-      <p className="text-gray-400">A super cool catchphrase</p>
+    <div className="px-[25%] py-[10%] mb-[10%]">
+      <h1 className="text-center text-6xl font-bold">Create New Bin.</h1>
+      <p className="m-[2%] text-center text-gray-400">A super cool catchphrase</p>
 
-      <form className="flex flex-col gap-8 items-start" onSubmit={submit}>
-        <input
+      <form className="mt-[5%]" onSubmit={submit}>
+
+        <InputButton 
+          placeholder="Enter a Bin Name"
           onChange={(e) => setLocation(e.target.value)}
           type="text"
-          required
-          className="bg-gray-300 w-1/4"
-        />
-
-        <div>
-          <h2>Select Bin Type</h2>
-          <div className="flex flex-row gap-4">
+          value={location}
+          />
+        
+        <div className="mt-[2%]">
+          <h2 className="font-bold">Select Bin Type</h2>
+          <div className="mt-[0.5%] flex flex-row justify-between gap-4">
+            
             <label>
               <input
                 type="radio"
@@ -52,7 +55,7 @@ export const CreateBin = () => {
               />
               Recycling
             </label>
-            <br />
+            <br/>
 
             <label>
               <input
@@ -88,12 +91,20 @@ export const CreateBin = () => {
             <br />
           </div>
         </div>
+
+        <div className="mt-[2%]">
+        <h2 className="mb-[0.5%] font-bold">Attach image</h2>
         <input
           onChange={(e) => setFile(e.target.files[0])}
           type="file"
           accept="image/*"
         />
-        <button className="p-[0.3%] border-2 text-white bg-black border-black rounded-md" type="submit">Submit</button>
+        </div>
+
+        <div className="mt-[2%] flex justify-center">
+        <button className="p-[0.3%] px-[8%] py-[0.8%] font-bold border-2 text-white bg-black border-black rounded-md" type="submit">Submit</button>
+        </div>
+
       </form>
     </div>
   );
