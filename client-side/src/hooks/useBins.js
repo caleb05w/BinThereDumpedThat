@@ -22,7 +22,7 @@ const useBins = () => {
 
     const interval = setInterval(() => {
       fetchBins();
-    }, 300000);
+    }, 50);
 
     return () => clearInterval(interval);
   }, []);

@@ -1,8 +1,10 @@
 import React from "react";
 import useBins from "../hooks/useBins";
+import useProfile from "../hooks/useProfile";
 
 const Home = () => {
   const { bins, loading, error, refreshBins } = useBins();
+  const { logout } = useProfile();
 
   return (
     <div>
@@ -21,6 +23,10 @@ const Home = () => {
                   <h1>{bin.location}</h1>
                   <h1>{bin.binStatus}</h1>
                   <h1>{bin.binType}</h1>
+                  <img
+                    className="w-40 h-32 object-contain"
+                    src={bin.image}
+                  ></img>
                 </div>
               ))}
             </div>
@@ -29,6 +35,8 @@ const Home = () => {
           )}
         </div>
       )}
+
+      <button onClick={logout}>Log Out</button>
     </div>
   );
 };
