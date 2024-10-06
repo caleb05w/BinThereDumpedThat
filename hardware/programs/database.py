@@ -57,4 +57,4 @@ def edit_database(binType, location, binStatus):
     collection_name.update_one(my_query, new_values)
 
 #add_database(1, "round the courner", "full")
-#edit_database(1, "test date", "full")
+edit_database(2, "Shrum Science Center C9002", "Full")

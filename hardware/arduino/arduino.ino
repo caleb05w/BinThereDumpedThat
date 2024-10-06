@@ -64,6 +64,30 @@ void loop() {
     lcd.setCursor(0, 1);  // First column, second row
     lcd.print(secondPart);
 
+    if (secondPart == "recycle") {
+        digitalWrite(8, HIGH);  // Turn the pin ON if secondPart is "recycle"
+        delay(6000);
+        digitalWrite(8, LOW);
+    } 
+
+    else if (secondPart == "landfill") {
+        digitalWrite(11, HIGH);  // Turn the pin ON if secondPart is "recycle"
+        delay(6000);
+        digitalWrite(11, LOW);
+    } 
+
+    else if (secondPart == "compost") {
+        digitalWrite(12, HIGH);  // Turn the pin ON if secondPart is "recycle"
+        delay(6000);
+        digitalWrite(12, LOW);
+    } 
+    
+    else {
+        digitalWrite(8, HIGH);
+        delay(6000);
+        digitalWrite(8, LOW);
+    }
+
     Serial.flush();  // Clear the serial buffer
   }
 

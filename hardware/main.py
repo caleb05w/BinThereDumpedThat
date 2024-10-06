@@ -56,13 +56,13 @@ def whatitem(image_path):
         "content": [
             {
             "type": "text",
-            "text": "What trash is the person holding in this image and what bin should they put it in? 1 is recycling, 2 is landfill, 3 is glass and 4 is compost. Return ONLY a python list format with item name first and number (as int) second."
+            "text": "What trash is the person holding in this image and what bin should they put it in? 1 is recycling, 2 is landfill, 3 is glass and 4 is compost. Return ONLY a python list format with item name first and number (as int) second. If unknown item or unrecognizable, return an empty list."
             },
             {
             "type": "image_url",
             "image_url": {
                 "url": f"data:image/jpeg;base64,{base64_image}",
-                "detail": "low"
+                "detail": "high"
             }
             }
         ]
@@ -117,16 +117,24 @@ def edit_database(binType, location, binStatus):
     
     collection_name.update_one(my_query, new_values)
 
+sensor_data_old = 0
+
 def arduino_serial_loop():
     #time.sleep(10000000)
     while True:
         sensor_data = read_sensor_data()
-        if sensor_data:
-            print("Sensor Data:", sensor_data)
-            if(int(sensor_data) < 8):
-                edit_database(1, "Test location", "full")
-            elif(int(sensor_data) > 10):
-                edit_database(1, "Test location", "empty")
+        print("Sensor Data:", sensor_data)
+        if int(sensor_data) != sensor_data_old:
+            sensor_data_old = int(sensor_data)
+            if(int(sensor_data) < 16):
+                edit_database(1, "Shrum Science Center C9002", "Full")
+                print("db updated: Full")
+            elif(int(sensor_data) > 30):
+                edit_database(1, "Shrum Science Center C9002", "Empty")
+                print("db updated: Empty")
+            elif(int(sensor_data) < 29 and int(sensor_data) > 17):
+                edit_database(1, "Shrum Science Center C9002", "Not Full")
+                print("db updated: Not Full")
 
 
 def mediapipe_camera_loop():
@@ -198,19 +206,21 @@ def mediapipe_camera_loop():
 
                                 #need code here
                                 itemndetails = whatitem(filename)
-                                itemname = itemndetails[0]
-                                binType = itemndetails[1]
 
-                                if(binType == 1):
-                                    send_string_to_arduino(itemname+".recycle")
-                                elif(binType == 2):
-                                    send_string_to_arduino(itemname+".landfill")
-                                elif(binType == 3):
-                                    send_string_to_arduino(itemname+".glass")
-                                elif(binType == 4):
-                                    send_string_to_arduino(itemname+".compost")
-                                else:
-                                    send_string_to_arduino(itemname+".error")
+                                if itemndetails != []:
+                                    itemname = itemndetails[0]
+                                    binType = itemndetails[1]
+
+                                    if(binType == 1):
+                                        send_string_to_arduino(itemname+".recycle")
+                                    elif(binType == 2):
+                                        send_string_to_arduino(itemname+".landfill")
+                                    elif(binType == 3):
+                                        send_string_to_arduino(itemname+".glass")
+                                    elif(binType == 4):
+                                        send_string_to_arduino(itemname+".compost")
+                                    else:
+                                        send_string_to_arduino(itemname+".error")
 
                     else:
                         # Store the landmarks for the first frame
