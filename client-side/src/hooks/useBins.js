@@ -5,6 +5,11 @@ const useBins = () => {
   const [bins, setBins] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedBin, setSelectedBin] = useState(null);
+
+  const selectBin = (bin) => {
+    setSelectedBin(bin);
+  };
 
   const fetchBins = async () => {
     try {
@@ -27,7 +32,14 @@ const useBins = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return { bins, loading, error, refreshBins: fetchBins };
+  return {
+    bins,
+    loading,
+    error,
+    refreshBins: fetchBins,
+    selectBin,
+    selectedBin,
+  };
 };
 
 export default useBins;
