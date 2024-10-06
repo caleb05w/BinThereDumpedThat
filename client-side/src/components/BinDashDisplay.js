@@ -4,9 +4,11 @@ export const BinDashDisplay = ({
   binType,
   binColor,
   isHeading,
+  onClick,
 }) => {
   return (
-    <div
+    <button
+        onClick={onClick}
       className={`flex flex-row ${
         isHeading ? "bg-black h-16 " : "bg-gray-100 h-40"
       } items-center justify-between text-sm w-full py-4 px-4 lg:px-10 overflow-hidden`}
@@ -32,6 +34,6 @@ export const BinDashDisplay = ({
       >
         {binType}
       </h1>
-    </div>
+    </button>
   );
 };

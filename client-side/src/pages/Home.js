@@ -5,7 +5,7 @@ import { BinDashDisplay } from "../components/BinDashDisplay";
 import { Profile } from "../components/Profile";
 
 const Home = () => {
-  const { bins, loading, error, refreshBins } = useBins();
+  const { selectedBin, selectBin, loading, error, bins } = useBins();
   const { logout } = useProfile();
 
   return (
@@ -32,6 +32,7 @@ const Home = () => {
                 {bins.map((bin, index) => (
                   <div key={index}>
                     <BinDashDisplay
+                      onClick={() => selectBin(bin)}
                       location={bin.location}
                       binType={bin.binType}
                       binStatus={bin.binStatus}
@@ -53,6 +54,8 @@ const Home = () => {
             )}
           </div>
         )}
+
+        <p>{selectedBin ? selectedBin.binStatus : "no bin selected"}</p>
       </div>
     </div>
   );
