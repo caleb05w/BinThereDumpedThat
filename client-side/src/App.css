@@ -3,7 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
+p {
+    font-size: 1.25rem;
+}
 .poppins-thin {
   font-family: "Poppins", sans-serif;
   font-weight: 100;

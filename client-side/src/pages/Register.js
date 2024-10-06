@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FiAlertTriangle, FiEye, FiEyeOff, FiLogIn } from "react-icons/fi";
+import InputButton from "../components/InputButton";
+import Button from "../components/Button";
 
 export const Register = () => {
   const [email, setEmail] = useState("");
@@ -61,39 +63,30 @@ export const Register = () => {
   };
 
   return (
-    <div>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <h2>
-            Register Now
-            <p>Enter your information below!</p>
-          </h2>
-          <div>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+    
+    <div className="flex lg:justify-end h-lvh bg-[#050505] relative w-lvw  md:justify-center sm:justify-center">
+      
+      <div className=" lg:w-[70%] w-[90%] rounded-[0.5rem] bg-white p-[1.5%] m-[5%] lg:m-[1%] ">
+        
+        <div className=" h-[100%] justify-between">
+        <form className='h-[100%] flex flex-col justify-between'onSubmit={handleSubmit}>
+          
+          <div className="  mt-[5%] text-center m-auto w-[73%] lg:w-[100%] ">
+            <h1 className="text-center lg:text-[80px] md:text-[60px] text-[40px] leading-none md:leading-[1] poppins-bold">Create an Account</h1>
+            <p className="text-center poppins-medium text-xl text-gray-500 lg:mt-[3%] mt-[5%]"> Enter Your Information Below </p>
+          </div>
+        
+        <div className=''>
+          <InputButton placeholder={"Email"} onChange={(e) => setEmail(e.target.value)} value={email} type={"email"} />
             <div>
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+            <InputButton placeholder={"Password"} onChange={(e) => setPassword(e.target.value)} value={password} type={"password"} />
               <div onClick={() => setShowPassword(!showPassword)}>
                 {showPassword ? <FiEye /> : <FiEyeOff />}
               </div>
             </div>
 
             <div>
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                placeholder="Confirm Password"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
-              />
+              <InputButton placeholder={"Confirm Password"} onChange={(e) => setPasswordConfirm(e.target.value)} value={passwordConfirm} type={"password"} />
               <div onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
                 <div>{showConfirmPassword ? <FiEye /> : <FiEyeOff />}</div>
               </div>
@@ -107,13 +100,14 @@ export const Register = () => {
               )}
             </div>
           </div>
-          <button type="submit">Sign Up</button>
-        </form>
-
-        <button onClick={login}>
+          <Button text={"Register"} type={"submit"} />
+       
+          <button onClick={login}>
           Already have an account? <span>Log in</span>
-        </button>
+        </button> 
+        </form>
       </div>
+    </div>
     </div>
   );
 };

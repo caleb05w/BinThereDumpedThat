@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useProfile from "../hooks/useProfile";
 import InputButton from "../components/InputButton";
+import Button from "../components/Button";
 
 export const Login = () => {
   const { profile, refreshProfile } = useProfile();
@@ -34,17 +35,17 @@ export const Login = () => {
   };
 
   return (
-    <div className="border-2 border-orange flex justify-end h-lvh bg-[#050505] relative w-lvw">
-      <div className="border-2 w-[75%]  border-black rounded-[0.25rem] bg-white p-[1%] ">
+    <div className="flex lg:justify-end h-lvh bg-[#050505] relative w-lvw  md:justify-center sm:justify-center">
+      <div className=" lg:w-[70%]  w-[90%] rounded-[0.5rem] bg-white p-[1.5%] m-[5%] lg:m-[1%] ">
         <div className=" h-[100%] flex flex-col justify-between">
-          <div className="">
-            <h1 className="text-center">Log In</h1>
-            <p className="text-center"> A super cool catchphrase </p>
+          <div className=" mt-[5%] text-center m-auto w-[73%] lg:w-[100%] ">
+            <h1 className="text-center lg:text-[80px] md:text-[60px] text-[40px] leading-none md:leading-[1] poppins-bold">Log In To Your Account</h1>
+            <p className="text-center poppins-medium text-xl text-gray-500 lg:mt-[3%] mt-[5%]"> A super cool catchphrase </p>
           </div>
 
           <form onSubmit={logIn}>
-            <div className="grid grid-rows-3 gap-[20%] border-2 h-fit">
-              <div className="border">
+            <div className="grid grid-rows-3 gap-[20%] mb-[2%]">
+              <div className="">
                 <p className="text-gray-600">Add your Email</p>
                 <InputButton
                   placeholder="Enter an Email"
@@ -63,17 +64,14 @@ export const Login = () => {
                   type="password"
                 />
               </div>
-              <button
-                className="border-2 border-black bg-[#050505] text-white flex justify-center px-[1%] h-fit py-[1%] w-[100%] rounded-[0.25rem]"
-                type="submit"
-              >
-                Log In
-              </button>
+              <Button 
+              text="Log In" 
+              type="submit" />
             </div>
           </form>
         </div>
 
-        {message && <p>{message}</p>}
+        {message && <p className='relative bottom-[1.5%] lg:bottom-[1.5%] text-[#FC3434] lg:text-[1rem] text-sm'>{message}</p>}
       </div>
     </div>
   );
