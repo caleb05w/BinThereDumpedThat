@@ -32,6 +32,9 @@ const upload = multer({ storage: storage });
 router.post("/createBin", upload.single("image"), async (req, res) => {
   const { location, binType } = req.body;
 
+  // console.log(req.body);
+  // console.log(req.file);
+
   const binTypeMap = {
     Recycling: 1,
     Landfill: 2,
