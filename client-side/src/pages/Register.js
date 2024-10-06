@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { FiAlertTriangle, FiEye, FiEyeOff, FiLogIn } from "react-icons/fi";
 import InputButton from "../components/InputButton";
 import Button from "../components/Button";
 
 export const Register = () => {
+  const [orgName, setOrgName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ export const Register = () => {
     try {
       const { data } = await axios.post(
         `${process.env.REACT_APP_URL}/auth/register`,
-        { email, password }
+        { email, password, orgName }
       );
 
       setMessage("");
@@ -63,51 +64,85 @@ export const Register = () => {
   };
 
   return (
-    
-    <div className="flex lg:justify-end h-lvh bg-[#050505] relative w-lvw  md:justify-center sm:justify-center">
-      
-      <div className=" lg:w-[70%] w-[90%] rounded-[0.5rem] bg-white p-[1.5%] m-[5%] lg:m-[1%] ">
-        
-        <div className=" h-[100%] justify-between">
-        <form className='h-[100%] flex flex-col justify-between'onSubmit={handleSubmit}>
-          
-          <div className="  mt-[5%] text-center m-auto w-[73%] lg:w-[100%] ">
-            <h1 className="text-center lg:text-[80px] md:text-[60px] text-[40px] leading-none md:leading-[1] poppins-bold">Create an Account</h1>
-            <p className="text-center poppins-medium text-xl text-gray-500 lg:mt-[3%] mt-[5%]"> Enter Your Information Below </p>
-          </div>
-        
-        <div className=''>
-          <InputButton placeholder={"Email"} onChange={(e) => setEmail(e.target.value)} value={email} type={"email"} />
-            <div>
-            <InputButton placeholder={"Password"} onChange={(e) => setPassword(e.target.value)} value={password} type={"password"} />
-              <div onClick={() => setShowPassword(!showPassword)}>
-                {showPassword ? <FiEye /> : <FiEyeOff />}
-              </div>
+    <div className="flex flex-col items-center w-screen h-screen justify-center">
+      <div className="flex flex-col gap-2">
+        <div className="text-center">
+          <form className="mb-10" onSubmit={handleSubmit}>
+            <div className="">
+              <h1 className="poppins-semibold text-6xl">Create an Account</h1>
+              <p className="poppins-regular text-lg mt-2 text-black text-opacity-40 mb-10">
+                {" "}
+                Enter Your Information Below{" "}
+              </p>
             </div>
 
-            <div>
-              <InputButton placeholder={"Confirm Password"} onChange={(e) => setPasswordConfirm(e.target.value)} value={passwordConfirm} type={"password"} />
-              <div onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
-                <div>{showConfirmPassword ? <FiEye /> : <FiEyeOff />}</div>
+            <div className="flex flex-col gap-3">
+              <InputButton
+                placeholder={"Organization Name"}
+                onChange={(e) => setOrgName(e.target.value)}
+                value={orgName}
+                type={"text"}
+              />
+              <InputButton
+                placeholder={"Email"}
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                type={"email"}
+              />
+              <div>
+                <InputButton
+                  placeholder={"Password"}
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  type={"password"}
+                  button={
+                    <button onClick={() => setShowPassword(!showPassword)}>
+                      {showPassword ? <FiEye /> : <FiEyeOff />}
+                    </button>
+                  }
+                />
+              </div>
+
+              <div>
+                <InputButton
+                  placeholder={"Confirm Password"}
+                  onChange={(e) => setPasswordConfirm(e.target.value)}
+                  value={passwordConfirm}
+                  type={"password"}
+                  button={
+                    <button
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                    >
+                      <div>
+                        {showConfirmPassword ? <FiEye /> : <FiEyeOff />}
+                      </div>
+                    </button>
+                  }
+                />
+              </div>
+
+              <div>
+                {passwordConfirm !== "" && !passwordMatch && (
+                  <p className="poppins-light rounded-none text-sm text-red-500">
+                    Passwords do not match
+                  </p>
+                )}
               </div>
             </div>
+            <Button text={"Register"} type={"submit"} />
 
-            <div>
-              {passwordConfirm !== "" && !passwordMatch && (
-                <p className="poppins-light rounded-none text-sm text-red-500">
-                  Passwords do not match
-                </p>
-              )}
-            </div>
-          </div>
-          <Button text={"Register"} type={"submit"} />
-       
-          <button onClick={login}>
-          Already have an account? <span>Log in</span>
-        </button> 
-        </form>
+            <button
+              className="poppins-light fixed bottom-4 left-1/2 transform -translate-x-1/2"
+              onClick={login}
+            >
+              Already have an account?{" "}
+              <span className="poppins-medium">Log in</span>
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

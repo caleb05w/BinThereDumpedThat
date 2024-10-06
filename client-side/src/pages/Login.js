@@ -12,6 +12,10 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
+  const register = () => {
+    navigate("/register");
+  };
+
   const logIn = async (e) => {
     e.preventDefault();
     try {
@@ -35,20 +39,20 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex lg:justify-end h-lvh bg-[#050505] relative w-lvw  md:justify-center sm:justify-center">
-      <div className=" lg:w-[70%]  w-[90%] rounded-[0.5rem] bg-white p-[1.5%] m-[5%] lg:m-[1%] ">
-        <div className=" h-[100%] flex flex-col justify-between">
-          <div className=" mt-[5%] text-center m-auto w-[73%] lg:w-[100%] ">
-            <h1 className="text-center lg:text-[80px] md:text-[60px] text-[40px] leading-none md:leading-[1] poppins-bold">Log In To Your Account</h1>
-            <p className="text-center poppins-medium text-xl text-gray-500 lg:mt-[3%] mt-[5%]"> A super cool catchphrase </p>
-          </div>
+    <div className="flex flex-col items-center w-screen h-screen justify-center">
+      <div className="flex flex-col gap-2">
+        <div className="text-center">
+          <h1 className="poppins-semibold text-6xl">Welcome Back</h1>
+          <p className="poppins-regular text-lg mt-2 text-black text-opacity-40 mb-10">
+            {" "}
+            Enter Your Log In Information Below{" "}
+          </p>
 
           <form onSubmit={logIn}>
             <div className="grid grid-rows-3 gap-[20%] mb-[2%]">
               <div className="">
-                <p className="text-gray-600">Add your Email</p>
                 <InputButton
-                  placeholder="Enter an Email"
+                  placeholder="Enter your Email"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                   type="email"
@@ -56,22 +60,31 @@ export const Login = () => {
               </div>
 
               <div>
-                <p className="text-gray-600">Enter a Password</p>
                 <InputButton
-                  placeholder="Enter a Password"
+                  placeholder="Enter your Password"
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                   type="password"
                 />
               </div>
-              <Button 
-              text="Log In" 
-              type="submit" />
+              <Button text="Log In" type="submit" />
             </div>
           </form>
         </div>
 
-        {message && <p className='relative bottom-[1.5%] lg:bottom-[1.5%] text-[#FC3434] lg:text-[1rem] text-sm'>{message}</p>}
+        <button
+          className="poppins-light fixed bottom-4 left-1/2 transform -translate-x-1/2"
+          onClick={register}
+        >
+          Don't have an account?{" "}
+          <span className="poppins-medium">Register Now</span>
+        </button>
+
+        {message && (
+          <p className="relative bottom-[1.5%] lg:bottom-[1.5%] text-[#FC3434] lg:text-[1rem] text-sm">
+            {message}
+          </p>
+        )}
       </div>
     </div>
   );
