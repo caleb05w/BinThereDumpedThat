@@ -19,6 +19,10 @@ export const CreateBin = () => {
     formData.append("location", location);
     formData.append("binType", binType);
 
+      for (let [key, value] of formData.entries()) {
+        console.log(`${key}:`, value);
+      }
+
     try {
       await axios.post(`${process.env.REACT_APP_URL}/createBin`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
